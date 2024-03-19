@@ -78,12 +78,12 @@ const fetchStream = async (url, options) => {
   }
 }
 
-const onSend = async () => {
-  if (sending.value || !state.input?.trim() || !model.value) {
+const on = async () => {
+  if (ing.value || !state.input?.trim() || !model.value) {
     return;
   }
 
-  sending.value = true;
+  ing.value = true;
 
   const { input } = state;
   rows.value = 1;
@@ -123,7 +123,7 @@ const onSend = async () => {
     }
   });
 
-  sending.value = false;
+  ing.value = false;
 }
 
 const rows = ref(1);
@@ -179,7 +179,7 @@ useMutationObserver(messageListEl, () => {
     </div>
     <div class="mt-4">
       <ClientOnly>
-        <UForm :state="state" @submit="onSend" @keydown.shift.enter="onSend">
+        <UForm :state="state" @submit="onSend" @keydown.enter="onSend">
           <div class="flex flex-row w-full gap-2">
             <UTextarea class="flex-1" autoresize :rows="rows" :disabled="!model" v-model="state.input"
               placeholder="Press shift + enter to send" />
